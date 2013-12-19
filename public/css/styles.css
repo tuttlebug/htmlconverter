@@ -63,6 +63,19 @@ p {
     max-height: none;
 }
 
+.anchorlink {
+    margin: 0.5em auto;
+    padding: 0.5em;
+    width: 8em;
+}
+
+a {
+    font-size: 200%;
+    color: #18528C;
+    text-decoration: underline;
+    text-align: center;
+}
+
 .bodycont {
     margin: 2em;
 }
