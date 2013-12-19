@@ -30,7 +30,7 @@ post '/api/upload' do
       #How do I delete the file?
       #How do I show an error message *to the user*--i.e., pop up an error message programmatically?
     #end
-    session['string'] = "moo"
+    session['string'] = "moo" #This is a test.
     
     # session[:mydoc] = params[:mydata]
     
