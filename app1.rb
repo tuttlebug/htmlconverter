@@ -6,7 +6,7 @@ get '/hi' do
   "Hello World!"
 end
 
-get '/home' do 
+get '/' do 
   erb :home 
 end
 
