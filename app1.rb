@@ -1,5 +1,6 @@
 require 'sinatra'
-enable :sessions
+#enable :sessions
+use Rack::Session::Pool
 
 
 get '/hi' do
@@ -10,27 +11,19 @@ get '/' do
   erb :home 
 end
 
-#get '/doc/:id' do
-#  # Is this necessary? And if so, what (if anything) should go here?
-#end
-
 post '/api/upload' do
   if params[:file]
 
     filename = params[:file][:filename]
     # puts params[:file] #shouldn't need this right now
-    f = params[:file][:tempfile].read #f = binary representation of file
+    session['f'] = params[:file][:tempfile].read #f = binary representation of file
     #session[:fileupload] = params[:file][:tempfile]
+    puts session['f']
     
     file_object=params[:file]
     #puts file_object[:type] #No longer necessary, right?
     
-    #giant If statement
-    #if "word" not in file_object[:type] && "html" not in file_object[:type] && "text" not in file_object[:type]
-      #How do I delete the file?
-      #How do I show an error message *to the user*--i.e., pop up an error message programmatically?
-    #end
-    session['string'] = "moo" #This is a test.
+    session['string'] = session['f'] #This is a test.
     
     # session[:mydoc] = params[:mydata]
     
