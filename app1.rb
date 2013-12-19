@@ -39,57 +39,66 @@ end
 #PART TWO: LOADING THE SCREEN FOR CORRECTIONS
 
 get '/edit' do
-  #things
-  erb :edit
-      # in edit route...
-    # @filetext = session[:fileupload].read
-      # do doc to html conversion here
-      
-    
-    # The above may be useful, or it may not, but it'll at least remind me of what needs doing.
-
-end
-
-
-  # do doc to html conversion here
-  def ConvertHTML(f, filename)
-    # Create a new filename
-    # f.write
-    # f.each_char do 
-      # if ch == "<"
-        # if f[ch+1].lowercase == "p" || f[ch+1].lowercase = "h" || f[ch+1].lowercase
-          # pass
-        #end
-        # else
-          #delete all text until the next ">" -- coding for this?
-          # (ugly but possible) alternative: split string at "<"
-    # new = f. Create a new file for writing in
-  end
-  #
-
-#not_found do
-#  "Sorry! It looks like the page you are looking for doesn't exist. Try again? (404 Not Found error)"
-#end
-#
-#error do
-#  "Something went wrong. (500 Internal Server error)"
-#end
-
-def ConvertHTML(f, filename)
-  # Create a new filename
-  # f.write
-  # f.each_char do 
-    # if ch == "<"
-      # if f[ch+1].lowercase == "p" || f[ch+1].lowercase = "h" || f[ch+1].lowercase
-        # pass
-      #end
-      # else
-        #delete all text until the next ">" -- coding for this?
-        # (ugly but possible) alternative: split string at "<"
-  # new = f. Create a new file for writing in
+  session['stripn'] = session['string'].gsub(/\n/,"")
+  session['stripr'] = session['stripn'].gsub(/\r/,"")
+  session['killHead'] = session['stripr'].gsub(/.*<\/head>/i, "")
+  session['string'] = session['killHead']
   
-  goodTags = ["<b", "<p", "<h1", "<h2", "<h3", "<h4", "<h5", "<h6", "<i", "<strong", "<ol", "<ul", "<li", "<u"]
-  #f.gsub()
-end
-#
+  for i in 0..200
+    session['string']=session['string'].gsub(/<p[^>]/i, "<p")
+  end
+  session['string']=session['string'].gsub(/p>/i, "p>")
 
+  session['string']=session['string'].gsub(/b>/i, "b>")
+
+  for i in 0..200
+    session['string']=session['string'].gsub(/<[^\/pbhiesoul][^>]/i, "<%")
+  end
+  
+  for i in 0..200
+    session['string']=session['string'].gsub(/<s[^t>]/i, "<%")
+  end
+  for i in 0..200
+    session['string']=session['string'].gsub(/<\/s[^t>]/i, "<%")
+  end
+  
+  session['string']=session['string'].gsub(/<%>/, "")
+  
+  for i in 0..200
+    session['string']=session['string'].gsub(/<body[^>]/i, "<body")
+  end
+  
+  session['string']=session['string'].gsub(/<body>/i, "")
+  session['string']=session['string'].gsub(/<\/body>/i, "")
+  
+  for i in 0..200
+    session['string']=session['string'].gsub(/<span[^>]/i, "<span")
+  end
+
+  session['string']=session['string'].gsub(/<span>/i, "")
+  session['string']=session['string'].gsub(/<\/span>/i, "")
+  
+  session['string']=session['string'].gsub(/<o:p>/i, "")
+  session['string']=session['string'].gsub(/<\/o:p>/i, "")
+  
+  session['string']=session['string'].gsub(/<\/div>/i, "")
+  session['string']=session['string'].gsub(/<\/html>/i, "")
+  
+  session['string']=session['string'].gsub(/<b/i, "<b>")
+  session['string']=session['string'].gsub(/b>>/i, "b>")
+  
+  session['string']=session['string'].gsub(/ul>/i, "ul>")
+  
+  for i in 0..200
+    session['string']=session['string'].gsub(/<ol[^>]/i, "<ol")
+  end
+  session['string']=session['string'].gsub(/ol>/i, "ol>")
+  
+  session['string']=session['string'].gsub(/li>/i, "li>")
+
+  erb :edit
+end
+
+get '/done' do
+  erb :done
+end
