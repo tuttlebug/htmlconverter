@@ -1,0 +1,17 @@
+﻿This is a test text document.
+
+Let's see how much formatting is preserved.
+
+ul 1 
+ul 2
+ul 3
+
+1. ol 1
+2. ol 2
+3. ol 3
+
+Lorem ipsum dolor sit amet, etc. 
+
+Now, let's see what italics do. 
+
+

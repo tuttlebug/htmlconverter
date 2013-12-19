@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Converter Site Attempt</title>
+    <!-- Normalize CSS to reset -->
+    <link rel="stylesheet" href="css/normalize.css">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+	
+    <!--<link rel="stylesheet" href="dropzone.css" />-->
+    <script src="js/dropzone.js"></script>
+    <script>
+        Dropzone.options.myDropzone = {
+            init: function () {
+                this.on("complete", function (file) {
+                    window.location.href= '/edit';
+                });
+            }
+        }
+    </script>
+    
+</head>
+<body>
+    <div class="container">
+	<div class="title">word to html</div>
+	<div class="bodycont">
+            <%= yield %>
+        </div>
+        <div class="footer">
+		<p>Terry Tuttle</p>
+		<p><em>A Liberal Artist's Guide to Web Design</em></p>
+		<p>Fall 2013</p>
+        </div>
+    </div>
+    
+</body>
+</html>
